@@ -1,0 +1,6 @@
+(a+b) % m=a % m + b % m
+(a-b) % m=a % m - b % m
+(a*b) % m=a % m * b % m
+ BUT FOR DIVISION WE SHOULD USE FERMAT'S LITTLE THEOREM:
+ (a/b) % m= (a * m inverse of b) % m
+ modular inverse of b= pow(b,m-2)
