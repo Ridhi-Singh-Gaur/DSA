@@ -2,5 +2,5 @@
 (a-b) % m=a % m - b % m
 (a*b) % m=a % m * b % m
  BUT FOR DIVISION WE SHOULD USE FERMAT'S LITTLE THEOREM:
- (a/b) % m= (a * m inverse of b) % m
+ (a/b) % m= (a * modular inverse of b) % m = (a * pow(b,m-2) ) % mod
  modular inverse of b= pow(b,m-2)
