@@ -451,4 +451,198 @@ Total Degree =
 Indegree + Outdegree = 2E
 
 */
+```java
+// ==========================================================
+// CONNECTED COMPONENTS
+// ==========================================================
+
+/*
+
+A connected component is a group of nodes
+where every node is reachable from every other node.
+
+In simple words:
+All nodes in the component are connected directly
+or indirectly.
+
+
+==================================================
+EXAMPLE
+==================================================
+
+Graph:
+
+1 ---- 2
+
+3 ---- 4 ---- 5
+
+6
+
+Connected Components:
+
+Component 1:
+1, 2
+
+Component 2:
+3, 4, 5
+
+Component 3:
+6
+
+So,
+Number of Connected Components = 3
+
+
+==================================================
+IMPORTANT POINT
+==================================================
+
+Connected Components are mainly used in
+UNDIRECTED GRAPHS.
+
+
+==================================================
+HOW TO FIND NUMBER OF CONNECTED COMPONENTS?
+==================================================
+
+1. Create a visited array.
+2. Traverse all nodes.
+3. If node is not visited:
+      - Start DFS/BFS
+      - Mark all reachable nodes
+      - Increase component count by 1
+
+Each DFS/BFS traversal gives
+one connected component.
+
+
+==================================================
+TIME COMPLEXITY
+==================================================
+
+Using DFS/BFS with adjacency list:
+
+O(V + E)
+
+where:
+V = number of vertices
+E = number of edges
+
+
+==================================================
+CODE : FIND NUMBER OF CONNECTED COMPONENTS
+==================================================
+*/
+
+import java.util.*;
+
+public class basics {
+
+    static void dfs(int node,
+                    ArrayList<ArrayList<Integer>> adj,
+                    boolean[] visited) {
+
+        visited[node] = true;
+
+        for(int neighbor : adj.get(node)) {
+
+            if(!visited[neighbor]) {
+
+                dfs(neighbor, adj, visited);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int n = 6;
+
+        ArrayList<ArrayList<Integer>> adj =
+                new ArrayList<>();
+
+
+        for(int i = 0; i <= n; i++) {
+
+            adj.add(new ArrayList<>());
+        }
+
+
+        // Component 1
+        adj.get(1).add(2);
+        adj.get(2).add(1);
+
+        // Component 2
+        adj.get(3).add(4);
+        adj.get(4).add(3);
+
+        adj.get(4).add(5);
+        adj.get(5).add(4);
+
+        // Node 6 is isolated
+
+
+        boolean[] visited = new boolean[n + 1];
+
+        int components = 0;
+
+
+        for(int i = 1; i <= n; i++) {
+
+            if(!visited[i]) {
+
+                components++;
+
+                dfs(i, adj, visited);
+            }
+        }
+
+        System.out.println(
+                "Number of Connected Components = "
+                + components);
+    }
+}
+
+
+/*
+
+==================================================
+DRY RUN
+==================================================
+
+Start from node 1:
+DFS visits 1,2
+components = 1
+
+Node 2 already visited.
+
+Start from node 3:
+DFS visits 3,4,5
+components = 2
+
+Node 4 visited
+Node 5 visited
+
+Start from node 6:
+DFS visits 6
+components = 3
+
+Final Answer:
+3
+
+
+==================================================
+IMPORTANT NOTES
+==================================================
+
+1. If graph has only 1 connected component,
+   graph is called CONNECTED GRAPH.
+
+2. If graph has multiple connected components,
+   graph is called DISCONNECTED GRAPH.
+
+3. DFS and BFS both can be used.
+
+*/
+```
+
 ```
